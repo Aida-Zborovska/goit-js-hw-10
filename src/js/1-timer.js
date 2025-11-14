@@ -20,9 +20,7 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    calendarCloseHandler(selectedDates[0]);
-  },
+  onClose: calendarCloseHandler,
 };
 
 flatpickr(input, options);
@@ -30,7 +28,8 @@ flatpickr(input, options);
 startBtn.disabled = true;
 startBtn.addEventListener('click', timerStartHandler);
 
-function calendarCloseHandler(selectedDate) {
+function calendarCloseHandler(selectedDates) {
+  const selectedDate = selectedDates[0];
   const nowDate = new Date();
   if (selectedDate <= nowDate) {
     startBtn.disabled = true;
