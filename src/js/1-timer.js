@@ -2,6 +2,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
+import icon from '../img/error-icon.svg';
 
 const input = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button');
@@ -33,7 +34,7 @@ function calendarCloseHandler(selectedDate) {
   const nowDate = new Date();
   if (selectedDate <= nowDate) {
     startBtn.disabled = true;
-    window.alert('Please choose a date in the future');
+    showNotification();
     return;
   }
   startBtn.disabled = false;
@@ -86,4 +87,22 @@ function updateTimerDisplay({ days, hours, minutes, seconds }) {
   timer.hours.textContent = addLeadingZero(hours);
   timer.minutes.textContent = addLeadingZero(minutes);
   timer.seconds.textContent = addLeadingZero(seconds);
+}
+
+function showNotification() {
+  iziToast.show({
+    position: 'topRight',
+    title: 'Error',
+    titleColor: '#FFFFFF',
+    titleSize: '16px',
+    titleLineHeight: '24px',
+    message: 'Please choose a date in the future',
+    messageColor: '#FFFFFF',
+    messageSize: '16px',
+    messageLineHeight: '24px',
+    backgroundColor: '#EF4040',
+    iconUrl: icon,
+    iconColor: '#FFFFFF',
+    progressBarColor: '#B51B1B',
+  });
 }
